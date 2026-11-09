@@ -12,15 +12,19 @@ macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 clean-targets: ["target", "dbt_packages"]   # folders deleted by `dbt clean`
 
-# Medallion architecture: the folder decides the schema and the materialization
+# Layers follow the dbt convention. Medallion equivalents in brackets:
+#   staging      (bronze) - one model per source table: rename, cast, nothing dropped
+#   intermediate (silver) - clean, deduplicate, join, apply business rules
+#   marts        (gold)   - business-ready dimensions, facts and reports
+
 models:
   webshop_analytics:
-    bronze:
-      +schema: bronze               # models/bronze/** -> schema "bronze"
-      +materialized: view           # only renames and casts, no data of its own
-    silver:
-      +schema: silver
-      +materialized: table          # joins and deduplication: store the result
-    gold:
-      +schema: gold
-      +materialized: table          # business tables, fast to query
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
