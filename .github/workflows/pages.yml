@@ -1,0 +1,32 @@
+# Publishes the site/ folder to GitHub Pages on every push to main that changes it.
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:                # allows a manual run from the Actions tab
+
+permissions:
+  contents: read                    # read the repository
+  pages: write                      # publish to GitHub Pages
+  id-token: write                   # prove to Pages that this workflow is allowed to deploy
+
+concurrency:                        # never run two deployments at the same time
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5             # get the repository files
+      - uses: actions/configure-pages@v5      # prepare Pages settings
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site                          # publish only the site/ folder
+      - id: deployment
+        uses: actions/deploy-pages@v4         # put it online
