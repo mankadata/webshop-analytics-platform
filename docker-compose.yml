@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine           # official PostgreSQL 16 image, small Alpine-based variant
+    container_name: webshop-postgres    # fixed name, so commands can refer to it
+    environment:
+      POSTGRES_USER: webshop            # admin user created on first start
+      POSTGRES_PASSWORD: webshop        # local development only - never a real password
+      POSTGRES_DB: warehouse            # database created on first start
+    ports:
+      - "5432:5432"                     # host port : container port -> reachable on localhost:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data # keep the data when the container is recreated
+    healthcheck:                        # tells Docker when the database is ready to accept connections
+      test: ["CMD-SHELL", "pg_isready -U webshop -d warehouse"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:                               # named volume managed by Docker
