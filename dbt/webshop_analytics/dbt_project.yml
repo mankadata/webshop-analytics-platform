@@ -1,0 +1,26 @@
+name: webshop_analytics             # project name; must match the key under "models:" below
+version: "1.0.0"                    # our own version number for the project
+config-version: 2                   # format version of this file (always 2 today)
+profile: webshop_analytics          # which profile in profiles.yml holds the connection
+
+# Where dbt looks for each kind of file
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+clean-targets: ["target", "dbt_packages"]   # folders deleted by `dbt clean`
+
+# Medallion architecture: the folder decides the schema and the materialization
+models:
+  webshop_analytics:
+    bronze:
+      +schema: bronze               # models/bronze/** -> schema "bronze"
+      +materialized: view           # only renames and casts, no data of its own
+    silver:
+      +schema: silver
+      +materialized: table          # joins and deduplication: store the result
+    gold:
+      +schema: gold
+      +materialized: table          # business tables, fast to query

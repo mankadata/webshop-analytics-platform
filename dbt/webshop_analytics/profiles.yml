@@ -1,0 +1,12 @@
+webshop_analytics:                  # profile name - referenced by "profile:" in dbt_project.yml
+  target: dev                       # default target used when no --target is given
+  outputs:
+    dev:                            # local development target
+      type: postgres                # which adapter to use (dbt-postgres)
+      host: "{{ env_var('WAREHOUSE_HOST', 'localhost') }}"
+      port: "{{ env_var('WAREHOUSE_PORT', '5432') | int }}"
+      user: "{{ env_var('WAREHOUSE_USER', 'webshop') }}"
+      password: "{{ env_var('WAREHOUSE_PASSWORD', 'webshop') }}"   # no secret in git
+      dbname: "{{ env_var('WAREHOUSE_DB', 'warehouse') }}"
+      schema: analytics             # default schema for models without a custom schema
+      threads: 4                    # how many models dbt may build in parallel
