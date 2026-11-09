@@ -1,3 +1,7 @@
 # Python packages for the dbt project. Install with: pip install -r requirements.txt
 dbt-core~=1.12.0       # dbt engine and command line tool
 dbt-postgres~=1.11.0   # adapter: lets dbt talk to PostgreSQL
+# Ingestion (source simulator and raw loader)
+Faker>=30,<41              # realistic fake names, cities, addresses
+psycopg2-binary>=2.9,<3    # PostgreSQL driver for Python
+tzdata>=2024.1             # time zone database (Europe/Budapest)
