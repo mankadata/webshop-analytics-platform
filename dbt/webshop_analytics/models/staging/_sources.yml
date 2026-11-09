@@ -1,0 +1,83 @@
+  version: 2
+
+# Raw tables loaded by the ingestion job (not built by dbt).
+# Every row has lineage columns: _batch_id, _source_file, _loaded_at.
+sources:
+  - name: shop                      # used as source('shop', '<table>')
+    description: Web shop database - daily change export (CSV).
+    schema: raw_shop                # where the tables live in the warehouse
+    loaded_at_field: _loaded_at     # column that tells when a row arrived
+    config:
+      freshness:                    # checked by `dbt source freshness`
+        warn_after: {count: 26, period: hour}
+        error_after: {count: 50, period: hour}
+    tables:
+      - name: customers
+        description: One row per customer version (every profile change is a new row).
+      - name: products
+        description: One row per product version (price changes, delisting).
+      - name: orders
+        description: One row per order status change.
+      - name: order_items
+        description: Order lines. Delivered at least once, so duplicates happen.
+      - name: returns
+        description: Returned order lines.
+
+  - name: payments
+    description: Payment provider webhooks (nested JSON in a jsonb column).
+    schema: raw_payments
+    loaded_at_field: _loaded_at
+    config:
+      freshness:
+        warn_after: {count: 26, period: hour}
+        error_after: {count: 50, period: hour}
+    tables:
+      - name: events
+
+  - name: erp
+    description: ERP export - purchasing, stock and invoices (Hungarian CSV, cp1250).
+    schema: raw_erp
+    loaded_at_field: _loaded_at
+    config:
+      freshness:
+        warn_after: {count: 26, period: hour}
+        error_after: {count: 50, period: hour}
+    tables:
+      - name: suppliers
+      - name: purchase_orders
+      - name: purchase_order_lines
+      - name: stock_movements
+      - name: invoices
+
+  - name: marketing
+    description: Daily ad platform reports (Google, Meta, TikTok) as JSON.
+    schema: raw_marketing
+    loaded_at_field: _loaded_at
+    config:
+      freshness:
+        warn_after: {count: 30, period: hour}
+        error_after: {count: 74, period: hour}
+    tables:
+      - name: ad_reports
+
+  - name: web
+    description: Web analytics events (JSON lines). Tracking started 2025-06-01.
+    schema: raw_web
+    loaded_at_field: _loaded_at
+    config:
+      freshness:
+        warn_after: {count: 26, period: hour}
+        error_after: {count: 50, period: hour}
+    tables:
+      - name: events
+
+  - name: ecb
+    description: ECB euro reference rates, business days only.
+    schema: raw_ecb
+    loaded_at_field: _loaded_at
+    config:
+      freshness:
+        warn_after: {count: 74, period: hour}    # no rates on weekends
+        error_after: {count: 98, period: hour}
+    tables:
+      - name: fx_rates

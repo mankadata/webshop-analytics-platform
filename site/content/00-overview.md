@@ -64,8 +64,8 @@ and how it was verified.
 | Step | Topic | Status |
 |---|---|---|
 | 1 | Setup: warehouse and dbt project | done |
-| 2 | Data sources: raw data and source declarations | in progress |
-| 3 | Staging models | planned |
+| 2 | Data sources: raw data and source declarations | done |
+| 3 | Staging models | in progress |
 | 4 | Intermediate: cleaning, keys, deduplication, quarantine | planned |
 | 5 | Marts: dimensions, facts, business marts | planned |
 | 6 | Data quality and tests | planned |

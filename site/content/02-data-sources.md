@@ -83,8 +83,37 @@ docker compose exec postgres psql -U webshop -d warehouse -c "\dn"   # six raw_*
 docker compose exec postgres psql -U webshop -d warehouse \
   -c "select * from raw_shop.orders limit 3;"                       # text columns + lineage
 ```
+## Declaring the sources in dbt
+
+dbt does not build the raw tables, so it has to be told about them. All six systems are
+declared in `models/staging/_sources.yml`:
+
+```yaml
+sources:
+  - name: shop
+    schema: raw_shop
+    loaded_at_field: _loaded_at
+    config:
+      freshness:
+        warn_after: {count: 26, period: hour}
+        error_after: {count: 50, period: hour}
+    tables:
+      - name: customers
+      - name: orders
+      # ...
+```
+
+- Models read raw data only through `{{ source('shop', 'orders') }}`, never through a
+  hard-coded table name. If a schema or table is renamed, only this file changes, and dbt
+  draws the lineage from raw table to report.
+- **Freshness checks** use the `_loaded_at` lineage column. Data arrives once a day, so a
+  warning after 26 hours and an error after 50 hours; the ECB source allows a weekend gap.
+
+```bash
+dbt ls --resource-type source     # 14 raw tables are visible to dbt
+dbt source freshness              # PASS for all 14
+```
 
 ## Next
 
-Declare the raw tables as dbt **sources** (`models/staging/_sources.yml`) with freshness
-checks, then build the first staging models on top of them.
+Staging models: one view per raw table that renames, casts and flattens - nothing dropped.
