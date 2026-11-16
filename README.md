@@ -2,9 +2,8 @@
 
 > [!WARNING]
 > **Work in progress!**
-> This is a personal learning and pet project that I build step by step, as my time and energy allow. <br\>
-> I also have a dog - so this is a pet project in more than one sense, and the
-> other pet has priority.
+> This is a personal learning and pet project that I build step by step, as my time and energy allow. <br>
+> I also have a dog - so this is a pet project in more than one sense, and the other pet has priority. <br>
 > The build log below shows what is finished and what comes next.
 
 **Build log site:** https://mankadata.github.io/webshop-analytics-platform/
