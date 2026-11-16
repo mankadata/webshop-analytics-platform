@@ -14,7 +14,7 @@ and reconciles across systems. The marts layer answers four groups of questions:
 
 | Team | Questions |
 |---|---|
-| Management & finance | net revenue, margin, monthly P&L, do shop, payments and invoices agree? |
+| Management & finance | net revenue, gross margin, contribution margin, do shop, payments and invoices agree? |
 | Marketing | customer acquisition cost, return on ad spend, conversion funnel by channel |
 | Operations | stock on hand, stockouts, supplier lead times |
 | CRM | customer segments, retention, repeat purchases |
