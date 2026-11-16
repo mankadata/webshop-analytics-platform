@@ -14,7 +14,7 @@ Every team used its own spreadsheet, so "orders last month" had three different 
 
 This project builds the company's warehouse: one place where metrics are defined once and
 reconcile across systems. The marts layer will answer four groups of questions:
-- **Management & finance:** net revenue, margin, monthly P&L, payment reconciliation
+- **Management & finance:** net revenue, gross margin, contribution margin, payment reconciliation
 - **Marketing:** customer acquisition cost, ROAS, conversion funnel by channel
 - **Operations:** stock on hand, stockouts, supplier lead times
 - **CRM:** customer segments, retention, repeat purchases
@@ -25,8 +25,8 @@ First the raw exports of the six source systems are loaded into a PostgreSQL war
 profiled, because a model can only be designed well once the real data and its defects are
 known. The staging layer then gives every raw table clean names and correct types without
 dropping anything, so it stays a stable, one-to-one base for everything above it. The
-intermediate layer does the real cleaning - deduplication, standardisation, currency
-conversion and quarantining of bad rows - because these steps need business rules and
+intermediate layer does the real cleaning : deduplication, standardisation, currency
+conversion and quarantining of bad rows, because these steps need business rules and
 reference data. The marts layer turns the result into dimensions, facts and reports that the
 business can trust, with personal data masked. Finally, tests, orchestration and CI make the
 whole pipeline run every day and stop bad data before it reaches a report.
@@ -48,6 +48,7 @@ flowchart LR
 | 6 | Marts: dimensions, facts, business marts | planned |
 | 7 | Data quality and tests | planned |
 | 8 | Orchestration and CI | planned |
+| 9 | Dashboards and reports | absolutely not! I love dashboards, but this project is big enough without them. Sorry, not sorry. |
 
 ## Technologies and why
 
