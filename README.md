@@ -1,7 +1,11 @@
 # WebShop Pro analytics platform
 
-> **Work in progress.** This is a personal learning project that I build step by step,
-> as my time and energy allow. The build log below shows what is finished and what comes next.
+> [!WARNING]
+> **Work in progress!**
+> This is a personal learning and pet project that I build step by step, as my time and
+> energy allow. I also have a dog - so this is a pet project in more than one sense, and the
+> other pet has priority.
+> The build log below shows what is finished and what comes next.
 
 **Build log site:** https://mankadata.github.io/webshop-analytics-platform/
 
