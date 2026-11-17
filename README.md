@@ -78,7 +78,9 @@ flowchart LR
 
 ## License
 
-© 2026 mankadata. All rights reserved.
-
 You are welcome to read this code. Please do not copy, redistribute or reuse substantial parts of it without permission. The code is provided
 "as is", without warranty of any kind, and I accept no liability for its use.
+
+© mankadata
+**Mariann M.** · [LinkedIn](https://www.linkedin.com/in/mmariann/)
+Budapest, Hungary
