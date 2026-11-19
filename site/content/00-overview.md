@@ -14,7 +14,7 @@ and reconciles across systems. The marts layer answers four groups of questions:
 
 | Team | Questions |
 |---|---|
-| Management & finance | net revenue, gross margin, contribution margin, do shop, payments and invoices agree? |
+| Management & finance | net revenue, gross and contribution margin, do shop, payments and invoices agree? |
 | Marketing | customer acquisition cost, return on ad spend, conversion funnel by channel |
 | Operations | stock on hand, stockouts, supplier lead times |
 | CRM | customer segments, retention, repeat purchases |
@@ -65,8 +65,9 @@ and how it was verified.
 |---|---|---|
 | 1 | Setup: warehouse and dbt project | done |
 | 2 | Data sources: raw data and source declarations | done |
-| 3 | Staging models | in progress |
-| 4 | Intermediate: cleaning, keys, deduplication, quarantine | planned |
-| 5 | Marts: dimensions, facts, business marts | planned |
-| 6 | Data quality and tests | planned |
-| 7 | Orchestration and CI | planned |
+| 3 | Data profiling: what the raw data looks like | done |
+| 4 | Staging models | done |
+| 5 | Intermediate: cleaning, keys, deduplication, quarantine | in progress |
+| 6 | Marts: dimensions, facts, business marts | planned |
+| 7 | Data quality and tests | planned |
+| 8 | Orchestration and CI | planned |

@@ -3,6 +3,8 @@ const TABS = [
   { id: "overview", label: "0 Overview", file: "content/00-overview.md" },
   { id: "setup", label: "1 Setup", file: "content/01-setup.md" },
   { id: "data-sources", label: "2 Data sources", file: "content/02-data-sources.md" },
+  { id: "profiling", label: "3 Data profiling", file: "content/03-profiling.md" },
+  { id: "staging", label: "4 Staging", file: "content/04-staging.md" },
 ];
 
 const tabList = document.getElementById("tabs");
