@@ -46,7 +46,7 @@ flowchart LR
 | 1 | Setup: warehouse and dbt project | done |
 | 2 | Data sources: raw data and source declarations | done |
 | 3 | Data profiling: what the raw data looks like | done |
-| 4 | Staging models | in progress |
+| 4 | Staging models | done |
 | 5 | Intermediate: cleaning, keys, deduplication, quarantine | planned |
 | 6 | Marts: dimensions, facts, business marts | planned |
 | 7 | Data quality and tests | planned |
