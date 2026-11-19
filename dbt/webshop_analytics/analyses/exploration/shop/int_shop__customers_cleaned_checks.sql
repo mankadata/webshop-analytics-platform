@@ -7,3 +7,11 @@ select coalesce(dq_issue, '(clean)') as dq_issue, count(*) as row_count
 from intermediate.int_shop__customers_cleaned
 group by 1
 order by row_count desc;
+
+-- Check 3: accounts per person
+select
+    accounts_per_person,
+    count(distinct master_customer_id)  as person_count
+from intermediate.int_shop__customer_identity
+group by 1
+order by 1;
