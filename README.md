@@ -47,7 +47,7 @@ flowchart LR
 | 2 | Data sources: raw data and source declarations | done |
 | 3 | Data profiling: what the raw data looks like | done |
 | 4 | Staging models | done |
-| 5 | Intermediate: cleaning, keys, deduplication, quarantine | planned |
+| 5 | Intermediate: cleaning, keys, deduplication, quarantine | in progress|
 | 6 | Marts: dimensions, facts, business marts | planned |
 | 7 | Data quality and tests | planned |
 | 8 | Orchestration and CI | planned |
