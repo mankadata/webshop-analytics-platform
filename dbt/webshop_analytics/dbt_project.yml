@@ -28,3 +28,7 @@ models:
     marts:
       +schema: marts
       +materialized: table
+
+seeds:
+  webshop_analytics:
+    +schema: seeds                  # reference lists live in their own schema
