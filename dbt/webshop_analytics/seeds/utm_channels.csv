@@ -1,0 +1,13 @@
+utm_source,utm_medium,channel,platform
+google,cpc,paid_search,google_ads
+adwords,cpc,paid_search,google_ads
+google,organic,organic_search,
+bing,organic,organic_search,
+facebook,paid_social,paid_social,meta_ads
+fb,paid_social,paid_social,meta_ads
+instagram,paid_social,paid_social,meta_ads
+meta,paidsocial,paid_social,meta_ads
+tiktok,paid_social,paid_social,tiktok_ads
+tt,paid,paid_social,tiktok_ads
+newsletter,email,email,newsletter
+mailchimp,email,email,newsletter
