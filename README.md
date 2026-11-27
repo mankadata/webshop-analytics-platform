@@ -28,7 +28,7 @@ First the raw exports of the six source systems are loaded into a PostgreSQL war
 profiled, because a model can only be designed well once the real data and its defects are
 known. The staging layer then gives every raw table clean names and correct types without
 dropping anything, so it stays a stable, one-to-one base for everything above it. The
-intermediate layer does the real cleaning : deduplication, standardisation, currency
+intermediate layer does the real cleaning: deduplication, standardisation, currency
 conversion and quarantining of bad rows, because these steps need business rules and
 reference data. The marts layer turns the result into dimensions, facts and reports that the
 business can trust, with personal data masked. Finally, tests, orchestration and CI make the
@@ -47,11 +47,14 @@ flowchart LR
 | 2 | Data sources: raw data and source declarations | done |
 | 3 | Data profiling: what the raw data looks like | done |
 | 4 | Staging models | done |
-| 5 | Intermediate: cleaning, keys, deduplication, quarantine | in progress|
-| 6 | Marts: dimensions, facts, business marts | planned |
-| 7 | Data quality and tests | planned |
-| 8 | Orchestration and CI | planned |
-| 9 | Dashboards and reports | absolutely not! I love dashboards, but this project is big enough without them. Sorry, not sorry. |
+| 5 | Intermediate: cleaning, deduplication, reconciliation | done |
+| 6 | Own Python ingestion from the ECB API | done |
+| 7 | Marts: dimensions, facts, business marts | in progress |
+| 8 | Data quality tests: schema and custom tests | in progress |
+| 9 | Incremental models, snapshots, macros | planned |
+| 10 | Documentation, tags and data governance | planned |
+| 11 | Orchestration (Airflow) and CI (GitHub Actions) | planned |
+| 12 | Dashboards and reports | absolutely not! I love dashboards, but this project is big enough without them. Sorry, not sorry. |
 
 ## Technologies and why
 
@@ -60,7 +63,7 @@ flowchart LR
 | **PostgreSQL 16** | data warehouse | free, runs anywhere, and supports warehouse-style SQL (window functions, JSON, grants); the SQL moves to Snowflake or BigQuery with few changes |
 | **Docker Compose** | runs the database (and later Airflow) | the same environment on every machine and in CI, nothing installed by hand |
 | **dbt Core** | transformations, tests, documentation | the industry standard for analytics engineering: SQL models, dependency graph, built-in tests and lineage |
-| **Python** | source simulator and raw loader | the usual language for ingestion; reads CSV, JSON and Hungarian-encoded files |
+| **Python** | source simulator, raw loader and ECB API ingestion | the usual language for ingestion; reads CSV, JSON and Hungarian-encoded files, and loads real exchange rates from the ECB Data Portal API |
 | **Apache Airflow** | daily orchestration | the most widely used scheduler; runs each layer in order and stops on failed tests |
 | **GitHub Actions** | CI and publishing | runs checks on every change and publishes the build log site |
 | **GitHub Codespaces + VS Code** | development environment | everything runs in the cloud - no installs or disk space on my own computer |
