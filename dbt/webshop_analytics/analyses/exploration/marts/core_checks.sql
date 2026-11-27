@@ -64,3 +64,27 @@ where invoiced_net_eur is not null
 --         products or quantity 0 / -1), 3 were fully returned: the returned cost
 --         cancels the cost of goods, while the shipping fee stays as revenue.
 -- Finding: not a model error; covered by a warning test in step 8.
+
+
+-- Check 8: order lines add up to the orders (conformed revenue)
+select
+    (select round(sum(invoiced_net_eur), 2) from marts.fct_orders)      as orders_sales_eur,
+    (select round(sum(sales_eur), 2)        from marts.fct_order_items) as lines_sales_eur;
+
+-- Check 9: gross margin by product category
+select
+    category_code,
+    round(sum(sales_eur - returns_eur), 0)                              as net_sales_eur,
+    round(sum(cost_of_goods_eur), 0)                                    as cost_eur,
+    round(100 * sum(sales_eur - returns_eur - cost_of_goods_eur)
+              / nullif(sum(sales_eur - returns_eur), 0), 1)             as margin_pct
+from marts.fct_order_items
+where is_valid
+group by 1
+order by net_sales_eur desc;
+
+-- Check 8 Result: orders 4,512,996 EUR vs lines 4,508,731 EUR; the 4,265 EUR (0.09 %)
+--   gap is the 26 orders with only invalid lines (no valid line to allocate to).
+-- Check 9 Result: Electronics brings over half of the sales with the lowest margin
+--   (21.8 %); Books the highest margin (31.1 %) with the smallest sales.
+

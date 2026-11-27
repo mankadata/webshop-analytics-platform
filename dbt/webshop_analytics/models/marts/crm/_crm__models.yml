@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_customer_segments
+    description: RFM segment of every customer (real person).
+    columns:
+      - name: customer_key
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_key
+      - name: segment
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [champion, loyal, new, at_risk, lost, registered_only]
+
+  - name: fct_customer_cohorts
+    description: Retention by first-order cohort and months since the first order.
+    data_tests:
+      - unique:
+          column_name: "cohort_month || '|' || months_since_first_order"

@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: fct_marketing_channel_monthly
+    description: Spend, sessions, conversion, new customers, ROAS and CAC per month and channel.
+    data_tests:
+      - unique:
+          column_name: "month || '|' || channel"
+    columns:
+      - name: channel
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel
+      - name: spend_eur
+        data_tests: [non_negative]

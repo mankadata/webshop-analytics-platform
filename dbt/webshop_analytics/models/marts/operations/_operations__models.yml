@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: fct_stock_daily
+    description: Stock on hand per product and day; stockout and negative stock flagged.
+    data_tests:
+      - unique:
+          column_name: "product_id || '|' || date_day"
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id

@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: fct_monthly_revenue
+    description: Net revenue per month, shipping country and marketing channel (EUR, without VAT).
+    data_tests:
+      # grain test: one row per month x country x channel
+      - unique:
+          column_name: "month || '|' || shipping_country || '|' || marketing_channel"
+    columns:
+      - name: month
+        data_tests: [not_null]
+      - name: net_revenue_eur
+        data_tests: [not_null]

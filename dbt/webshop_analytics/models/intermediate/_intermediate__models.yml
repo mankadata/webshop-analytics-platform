@@ -1,0 +1,71 @@
+version: 2
+
+# Key tests for the intermediate models: after cleaning and deduplication every
+# entity must appear exactly once.
+
+models:
+  - name: int_shop__customers_cleaned
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+  - name: int_shop__customer_identity
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: master_customer_id
+        data_tests: [not_null]
+  - name: int_shop__orders_cleaned
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+  - name: int_shop__order_items_cleaned
+    columns:
+      - name: order_item_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('int_shop__orders_cleaned')
+                field: order_id
+  - name: int_shop__products_cleaned
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+  - name: int_shop__returns_cleaned
+    columns:
+      - name: return_id
+        data_tests: [unique, not_null]
+  - name: int_payments__events_cleaned
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+  - name: int_erp__invoices_cleaned
+    columns:
+      - name: invoice_number
+        data_tests: [unique, not_null]
+  - name: int_erp__stock_movements_cleaned
+    columns:
+      - name: movement_id
+        data_tests: [unique, not_null]
+  - name: int_erp__purchase_orders_cleaned
+    columns:
+      - name: po_number
+        data_tests: [unique, not_null]
+  - name: int_finance__order_reconciliation
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+  - name: int_web__events_cleaned
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+  - name: int_web__sessions
+    columns:
+      - name: session_id
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [paid_search, paid_social, email, organic_search, direct]

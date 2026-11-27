@@ -1,0 +1,124 @@
+version: 2
+
+# Schema tests for the core marts: keys are unique and present, codes come from a
+# known list, and every fact row points to an existing dimension row.
+
+models:
+  - name: dim_date
+    description: Calendar dimension, one row per day (2025-2026).
+    columns:
+      - name: date_day
+        data_tests: [unique, not_null]
+
+  - name: dim_products
+    description: Product dimension, one row per product (latest version) with average purchase cost.
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+      - name: sku
+        data_tests: [unique, not_null]
+      - name: category_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [BEA, BOO, ELE, HOM, SPO, TOY]
+      - name: avg_unit_cost_eur
+        data_tests: [not_null, non_negative]
+      - name: cost_source
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [purchase_orders, stock_movements]
+      - name: supplier_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_suppliers')
+                field: supplier_code
+
+  - name: dim_suppliers
+    description: Supplier dimension, one row per supplier with delivery performance.
+    columns:
+      - name: supplier_code
+        data_tests: [unique, not_null]
+
+  - name: dim_customers
+    description: Customer dimension, one row per real person (no names, e-mails or phones).
+    columns:
+      - name: customer_key
+        data_tests: [unique, not_null]
+      - name: buyer_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [registered_only, one_time, repeat]
+
+  - name: dim_channels
+    description: Marketing channel dimension, one row per channel (paid / owned / earned).
+    columns:
+      - name: channel
+        data_tests: [unique, not_null]
+      - name: channel_group
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [paid, owned, earned, unknown]
+
+  - name: fct_orders
+    description: Order fact, one row per order, with net revenue, cost of goods and gross margin in EUR.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_key
+      - name: order_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [pending, paid, shipped, delivered, returned, cancelled]
+      - name: marketing_channel
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel
+      - name: reconciliation_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [matched, not_paid, missing_document, invalid_order_line, underpaid, unexplained]
+
+  - name: fct_order_items
+    description: Order line fact, one row per line; ERP revenue allocated to the valid lines.
+    columns:
+      - name: order_item_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+      - name: sales_eur
+        data_tests: [non_negative]
+      - name: product_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+              config:
+                severity: warn      # 35 lines point to unknown products (flagged, DQ10)
