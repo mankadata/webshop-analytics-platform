@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per order line, deduplicated and validated.
--- Rules come from analyses/exploration/shop/stg_shop__order_items.sql (Q1-Q4).
+-- Rules come from analyses/exploration/intermediate/shop/stg_shop__order_items.sql (Q1-Q4).
 -- Invalid lines are kept but flagged (is_valid = false), so nothing disappears
 -- silently; marts use only valid lines, the quarantine view lists the others.
 

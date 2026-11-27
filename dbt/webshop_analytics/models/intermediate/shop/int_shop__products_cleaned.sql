@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per product, latest version, cleaned.
--- Rules come from analyses/exploration/shop/stg_shop__products.sql (Q1-Q4).
+-- Rules come from analyses/exploration/intermediate/shop/stg_shop__products.sql (Q1-Q4).
 -- The price history (one row per version) stays in staging for marts / snapshots.
 
 with products as (

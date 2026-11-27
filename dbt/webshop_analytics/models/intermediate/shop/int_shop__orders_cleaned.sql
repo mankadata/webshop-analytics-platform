@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per order, current status, cleaned.
--- Rules come from analyses/exploration/shop/stg_shop__orders.sql.
+-- Rules come from analyses/exploration/intermediate/shop/stg_shop__orders.sql.
 -- The source is an event log: one row per status change of an order.
 
 

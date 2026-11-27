@@ -1,6 +1,6 @@
 -- Intermediate (silver): one row per order, the three systems side by side.
 -- shop (what should be paid) vs payments (what was paid) vs ERP (what was invoiced).
--- Rules come from analyses/exploration/finance/reconciliation.sql (Q1-Q3).
+-- Rules come from analyses/exploration/intermediate/finance/reconciliation.sql (Q1-Q3).
 
 with orders as (
     select * from {{ ref('int_shop__orders_cleaned') }}

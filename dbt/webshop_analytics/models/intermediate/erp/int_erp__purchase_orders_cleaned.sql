@@ -1,6 +1,6 @@
 -- Intermediate (silver): one row per purchase order, latest status, with lines,
 -- goods receipts and supplier lead time.
--- Rules come from analyses/exploration/erp/stg_erp__purchase_orders.sql (Q1-Q3).
+-- Rules come from analyses/exploration/intermediate/erp/stg_erp__purchase_orders.sql (Q1-Q3).
 -- The ERP exports a new version when an order is completed: NYITOTT -> TELJESITVE.
 
 with purchase_orders as (

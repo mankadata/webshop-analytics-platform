@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per return, linked to the order line, valued.
--- Rules come from analyses/exploration/shop/stg_shop__returns.sql (Q1).
+-- Rules come from analyses/exploration/intermediate/shop/stg_shop__returns.sql (Q1).
 
 with returns as (
     select * from {{ ref('stg_shop__returns') }}

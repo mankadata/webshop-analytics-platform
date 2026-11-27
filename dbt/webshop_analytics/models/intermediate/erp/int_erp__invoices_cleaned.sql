@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per ERP document (invoice or credit note), parsed.
--- Rules come from analyses/exploration/erp/stg_erp__invoices.sql (Q1-Q3).
+-- Rules come from analyses/exploration/intermediate/erp/stg_erp__invoices.sql (Q1-Q3).
 -- The ERP exports Hungarian formats: '1 003 110', '-1 048,12', '27%', '2025.01.31.'
 
 with invoices as (

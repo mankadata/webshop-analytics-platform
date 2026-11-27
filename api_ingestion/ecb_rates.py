@@ -10,7 +10,7 @@ Usage (from the repository root):
 -----
 Note: the dbt models keep using the simulated rates (raw_ecb.fx_rates), because the
 synthetic company priced its orders with them. See
-dbt/webshop_analytics/analyses/exploration/ecb/ecb_api_comparison.sql 
+dbt/webshop_analytics/analyses/exploration/intermediate/ecb/ecb_api_comparison.sql 
 """
 
 import argparse

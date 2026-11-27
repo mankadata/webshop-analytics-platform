@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per stock movement, parsed and signed.
--- Rules come from analyses/exploration/erp/stg_erp__stock_movements.sql (Q1-Q2).
+-- Rules come from analyses/exploration/intermediate/erp/stg_erp__stock_movements.sql (Q1-Q2).
 -- The ERP stores quantities as positive numbers; the direction comes from the code:
 --   ELAD = sale (out), BEV = goods receipt (in), VISSZ = customer return (in),
 --   LELT = stock count adjustment (signed: shrinkage is negative on purpose).

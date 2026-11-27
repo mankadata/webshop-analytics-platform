@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per platform, campaign and day, spend in EUR.
--- Rules come from analyses/exploration/marketing/stg_marketing__ad_campaigns.sql (Q1).
+-- Rules come from analyses/exploration/intermediate/marketing/stg_marketing__ad_campaigns.sql (Q1).
 -- Spend arrives in the currency of each platform: Google EUR, Meta and TikTok USD,
 -- newsletter HUF.
 

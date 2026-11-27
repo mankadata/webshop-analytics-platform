@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 -- Intermediate (silver): one row per web analytics event, deduplicated.
--- Rules come from analyses/exploration/web/stg_web__events.sql (Q1-Q2).
+-- Rules come from analyses/exploration/intermediate/web/stg_web__events.sql (Q1-Q2).
 -- Materialized as a table: ~750k rows are read by the sessions model and by marts.
 
 with events as (

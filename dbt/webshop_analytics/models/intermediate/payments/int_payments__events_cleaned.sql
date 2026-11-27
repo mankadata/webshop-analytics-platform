@@ -1,5 +1,5 @@
 -- Intermediate (silver): one row per payment event, deduplicated, test events flagged.
--- Rules come from analyses/exploration/payments/stg_payments__events.sql (Q1-Q3).
+-- Rules come from analyses/exploration/intermediate/payments/stg_payments__events.sql (Q1-Q3).
 
 with events as (
     select * from {{ ref('stg_payments__events') }}
