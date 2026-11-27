@@ -6,6 +6,9 @@ const TABS = [
   { id: "profiling", label: "3 Data profiling", file: "content/03-profiling.md" },
   { id: "staging", label: "4 Staging", file: "content/04-staging.md" },
   { id: "intermediate", label: "5 Intermediate", file: "content/05-intermediate.md" },
+  { id: "api", label: "6 ECB API", file: "content/06-api-ingestion.md" },
+  { id: "marts", label: "7 Marts", file: "content/07-marts.md" },
+  { id: "tests", label: "8 Tests", file: "content/08-tests.md" },
 ];
 
 const tabList = document.getElementById("tabs");

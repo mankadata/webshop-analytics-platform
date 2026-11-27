@@ -49,8 +49,8 @@ flowchart LR
 | 4 | Staging models | done |
 | 5 | Intermediate: cleaning, deduplication, reconciliation | done |
 | 6 | Own Python ingestion from the ECB API | done |
-| 7 | Marts: dimensions, facts, business marts | in progress |
-| 8 | Data quality tests: schema and custom tests | in progress |
+| 7 | Marts: dimensions, facts, business marts | done |
+| 8 | Data quality tests: schema and custom tests | done |
 | 9 | Incremental models, snapshots, macros | planned |
 | 10 | Documentation, tags and data governance | planned |
 | 11 | Orchestration (Airflow) and CI (GitHub Actions) | planned |
