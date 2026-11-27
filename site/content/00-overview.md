@@ -67,7 +67,10 @@ and how it was verified.
 | 2 | Data sources: raw data and source declarations | done |
 | 3 | Data profiling: what the raw data looks like | done |
 | 4 | Staging models | done |
-| 5 | Intermediate: cleaning, keys, deduplication, quarantine | done |
-| 6 | Marts: dimensions, facts, business marts | planned |
-| 7 | Data quality and tests | planned |
-| 8 | Orchestration and CI | planned |
+| 5 | Intermediate: cleaning, deduplication, reconciliation | done |
+| 6 | Own Python ingestion from the ECB API | done |
+| 7 | Marts: dimensions, facts, business marts | in progress |
+| 8 | Data quality tests: schema and custom tests | planned |
+| 9 | Incremental models, snapshots, macros | planned |
+| 10 | Documentation, tags and data governance | planned |
+| 11 | Orchestration (Airflow) and CI (GitHub Actions) | planned |
