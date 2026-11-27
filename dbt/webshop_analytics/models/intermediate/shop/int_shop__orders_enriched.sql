@@ -71,11 +71,14 @@ final as (
               / reconciliation.units_per_eur, 2)                    as net_revenue_eur,
         reconciliation.paid_eur                                     as paid_gross_eur,
 
-        -- first order of the real person (CRM: new vs returning customer)
-        row_number() over (
-            partition by identity.master_customer_id
-            order by orders.ordered_at, orders.order_id
-        )                                                           as customer_order_number
+         -- first order of the real person (CRM: new vs returning customer);
+        -- counted on invoiced orders only, so a cancelled order is never the "first"
+        case when invoices.order_id is not null then
+            row_number() over (
+                partition by identity.master_customer_id, invoices.order_id is not null
+                order by orders.ordered_at, orders.order_id
+            )
+        end                                                 as customer_order_number
     from orders
     left join identity       on identity.customer_id      = orders.customer_id
     left join reconciliation on reconciliation.order_id   = orders.order_id
