@@ -5,6 +5,7 @@ const TABS = [
   { id: "data-sources", label: "2 Data sources", file: "content/02-data-sources.md" },
   { id: "profiling", label: "3 Data profiling", file: "content/03-profiling.md" },
   { id: "staging", label: "4 Staging", file: "content/04-staging.md" },
+  { id: "intermediate", label: "5 Intermediate", file: "content/05-intermediate.md" },
 ];
 
 const tabList = document.getElementById("tabs");
@@ -91,3 +92,5 @@ async function show(id) {
 
 window.addEventListener("hashchange", () => show(location.hash.slice(1)));
 show(location.hash.slice(1));
+
+

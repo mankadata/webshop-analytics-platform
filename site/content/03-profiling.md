@@ -82,7 +82,7 @@ Numbers are from the profiling run; rates matter more than exact counts.
 |---|---|---|
 | Hungarian dates and numbers | `2025.01.01.`, `298 818`, `42,97` | DQ06, DQ08 |
 | VAT rate in four spellings | `27%`, `27`, `27,00` | DQ08 |
-| Gross is not net + VAT | 82 invoices | DQ14 |
+| VAT differences | 82 invoices - all rounding (max 2 cents / 1.56 Ft), see step 5 | - |
 | Sales booked with the wrong sign | 66 sale movements with negative quantity | DQ09 |
 | SKU casing and spaces | 320 movements like ` wsp-ele-00012` | DQ04 |
 
